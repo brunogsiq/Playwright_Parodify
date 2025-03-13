@@ -24,14 +24,13 @@ test('02 - Validar identificação usuário logado.', async ({ page }) =>
 
 	const loggedeUser = page.locator('.logged-user')
 	
-	//Quando validar o usuário
-	await page.waitForSelector('loggedeUser');
-
 	await page.waitForTimeout(3000)
 
-	//Então sistema deverá exibir o mesmo
+	//Quando validar o usuário
 	await expect(loggedeUser)
 		.toBeVisible();
+
+	//Então sistema deverá exibir o mesmo
 	await expect(loggedeUser)
 		.toHaveText('Fernando Papito');
 });
@@ -117,10 +116,12 @@ test('05 - Validar buscar por música.', async ({ page }) =>
 
 	//Então o sistema deverá apresenta somente esta
 	const musicList = page.locator('.gap-y-8');
-	const nameSong = page.locator('//h6[text()="Nice Bugs Finish Devs"]');
+	const nameSong = page.locator('h6');
 
 	await expect(musicList)
 		.toBeVisible()
-		expect(nameSong)
+		await expect(nameSong)
 			.toBeVisible()
+			await expect(nameSong)
+				.toHaveText('Nice Bugs Finish  Devs')
 });
